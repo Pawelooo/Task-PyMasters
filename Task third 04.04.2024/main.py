@@ -9,7 +9,7 @@ class Searchable:
 
 class Borrowable:
 
-    def borrow_book(self, value: str):
+    def borrow_book(self, book: Book):
         pass
 
 
@@ -33,17 +33,7 @@ class SearchStrategy:
         pass
 
 
-class SearchBookByTitle(SearchStrategy):
-
-    def __init__(self, books: List[Book]):
-        self.books = books
-
-    def search_book(self, value: str):
-        for book in self.books:
-            return book.autor == value
-
-
-class SearchBookByAuthor(SearchStrategy):
+class TitleSearchStrategy(SearchStrategy):
 
     def __init__(self, books: List[Book]):
         self.books = books
@@ -56,24 +46,41 @@ class SearchBookByAuthor(SearchStrategy):
         return lst_books
 
 
-class SearchBookByIsbn(SearchStrategy):
+class AuthorSearchStrategy(SearchStrategy):
 
     def __init__(self, books: List[Book]):
         self.books = books
 
     def search_book(self, value: str):
+        lst_books = []
         for book in self.books:
-            return book.isbn == value
+            if book.autor == value:
+                lst_books.append(book)
+        return lst_books
+
+
+class IsbnSearchStrategy(SearchStrategy):
+
+    def __init__(self, books: List[Book]):
+        self.books = books
+
+    def search_book(self, value: str):
+        lst_books = []
+        for book in self.books:
+            if book.isbn == value:
+                lst_books.append(book)
+        return lst_books
 
 
 class LibraryCatalog:
 
-    def __init__(self, search: SearchStrategy):
-        self.search = search
+    def __init__(self, search_strategy: SearchStrategy):
+        self.search_strategy = search_strategy
         self.books = []
 
-    def search_book(self, value: str):
-        self.search.search_book(value)
+    def search_book_by_title(self, value: str):
+        return self.search_strategy.search(value)
+
 
     def add_book(self, title: str, author: str, isbn: str):
         self.books.append(Book(title, author, isbn))
@@ -89,7 +96,19 @@ class Member(User):
 
     def __init__(self, name: str):
         super().__init__(name)
+
+
+class Borrowable:
+    def borrow_book(self, book: Book):
+        pass
+
+
+class BorrowingMember(Member, Borrowable):
+    
+    def __init__(self, name: str):
+        super().__init__(name)
         self.borrowed_books = []
 
     def borrow_book(self, book: Book):
         self.borrowed_books.append(book)
+        

@@ -38,7 +38,6 @@ Book implementowała tylko te funkcje, które są dla niej sensowne.
 Wprowadź abstrakcje, które odwrócą zależność między wysokopoziomowymi operacjami a szczegółami
 implementacji wyszukiwania i wypożyczania książek. Na przykład, LibraryCatalog powinien zależeć od
 abstrakcyjnego interfejsu SearchStrategy, a nie od konkretnych implementacji algorytmów wyszukiwania.
-25/29
 
 Dodatkowe informacje:
 
