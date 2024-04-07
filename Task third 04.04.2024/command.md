@@ -52,4 +52,5 @@ wypożyczonych książek), przestrzegając zasad SOLID.
 
 ### PyMasters
 https://github.com/pymasterspl/
+
 https://pymasters.pl/
