@@ -24,3 +24,4 @@ generowania raportów.
 
 ### PyMasters
 https://github.com/pymasterspl/
+https://pymasters.pl/
